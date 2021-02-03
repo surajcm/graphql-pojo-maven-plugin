@@ -28,6 +28,6 @@ public class GraphQLPojoMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        JavaCodeGenerator.getInstance().generatePojoFromSchema(schema,outputDir,packageName);
+        JavaCodeGenerator.getInstance().generatePojoFromSchema(schema, outputDir, packageName);
     }
 }

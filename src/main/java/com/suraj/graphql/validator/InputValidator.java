@@ -9,21 +9,21 @@ public class InputValidator {
     private InputValidator() {
     }
 
-    public synchronized static InputValidator getInstance() {
+    public static synchronized InputValidator getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new InputValidator();
         }
         return INSTANCE;
     }
 
-    public void validateInputs(File schema, File outputDir, String packageName)
+    public void validateInputs(final File schema, final File outputDir, final String packageName)
             throws IllegalArgumentException {
         validateSchema(schema);
         validateOutputDir(outputDir);
         validatePackageName(packageName);
     }
 
-    private void validateSchema(File schema) {
+    private void validateSchema(final File schema) {
         String path = "";
         if (schema == null || !schema.exists()) {
             if (schema != null) {
@@ -33,7 +33,7 @@ public class InputValidator {
         }
     }
 
-    private void validateOutputDir(File outputDirectory) {
+    private void validateOutputDir(final File outputDirectory) {
         String path = "";
         if (outputDirectory == null || !outputDirectory.exists()) {
             if (outputDirectory != null) {
@@ -43,7 +43,7 @@ public class InputValidator {
         }
     }
 
-    private void validatePackageName(String packageName) {
+    private void validatePackageName(final String packageName) {
         if (packageName == null || packageName.trim().isEmpty()) {
             throw new IllegalArgumentException("Invalid packageName : " + packageName);
         }

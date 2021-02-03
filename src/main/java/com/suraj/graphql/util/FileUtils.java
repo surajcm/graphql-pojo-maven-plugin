@@ -13,14 +13,14 @@ public class FileUtils {
     private FileUtils() {
     }
 
-    public synchronized static FileUtils getInstance() {
+    public static synchronized FileUtils getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new FileUtils();
         }
         return INSTANCE;
     }
 
-    public void cleanAndRecreateOutputDir(File outputDir, String packageName) throws IOException {
+    public void cleanAndRecreateOutputDir(final File outputDir, final String packageName) throws IOException {
         // during validation, we ensure that the output directory exists
         // if output directory is empty,  create the package
         String[] fileNames = outputDir.list();
@@ -45,13 +45,13 @@ public class FileUtils {
         }
     }
 
-    private void createPackageDirectory(String packageName, File packageDirectory) throws IOException {
+    private void createPackageDirectory(final String packageName, final File packageDirectory) throws IOException {
         if (!(packageDirectory.mkdirs() && packageDirectory.exists())) {
             throw new IOException("Unable to create package : " + packageName);
         }
     }
 
-    private String packageWithDirectoryFormat(String packageName) {
+    private String packageWithDirectoryFormat(final String packageName) {
         return Collections.list(new StringTokenizer(packageName, ".")).stream()
                 .map(token -> (String) token)
                 .filter(t -> t.trim().isEmpty())

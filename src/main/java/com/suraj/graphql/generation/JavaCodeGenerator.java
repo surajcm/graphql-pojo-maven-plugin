@@ -6,10 +6,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
 public class JavaCodeGenerator {
     private static JavaCodeGenerator INSTANCE;
@@ -17,14 +13,14 @@ public class JavaCodeGenerator {
     private JavaCodeGenerator() {
     }
 
-    public synchronized static JavaCodeGenerator getInstance() {
+    public static synchronized JavaCodeGenerator getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new JavaCodeGenerator();
         }
         return INSTANCE;
     }
 
-    public void generatePojoFromSchema(File schema, File outputDir, String packageName)
+    public void generatePojoFromSchema(final File schema, final File outputDir, final String packageName)
             throws MojoExecutionException {
         try {
             InputValidator.getInstance().validateInputs(schema, outputDir, packageName);

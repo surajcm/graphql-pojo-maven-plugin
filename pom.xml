@@ -6,7 +6,7 @@
     <groupId>com.suraj.graphql</groupId>
     <artifactId>graphql-pojo-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <name>graphql-pojo-maven-plugin</name>
     <description>Generates Java POJO based on GraphQL schema</description>
@@ -40,6 +40,12 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <project.java.version>1.8</project.java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
 
     <dependencies>
         <dependency>
@@ -66,6 +72,80 @@
     </dependencies>
      <build>
          <plugins>
+             <plugin>
+                 <artifactId>maven-failsafe-plugin</artifactId>
+                 <version>2.22.2</version>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-site-plugin</artifactId>
+                 <version>3.7.1</version>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                 <version>3.0.0</version>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-surefire-plugin</artifactId>
+                 <version>2.22.2</version>
+                 <configuration>
+                     <testFailureIgnore>true</testFailureIgnore>
+                 </configuration>
+             </plugin>
+
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-checkstyle-plugin</artifactId>
+                 <version>3.1.1</version>
+                 <configuration>
+                     <propertyExpansion>config_loc=${basedir}/config/checkstyle</propertyExpansion>
+                     <configLocation>config/checkstyle/checkstyle.xml</configLocation>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>check</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-pmd-plugin</artifactId>
+                 <version>3.14.0</version>
+                 <configuration>
+                     <failOnViolation>false</failOnViolation>
+                     <printFailingErrors>true</printFailingErrors>
+                     <targetJdk>15</targetJdk>
+                     <rulesets>
+                         <ruleset>${project.basedir}/config/pmd/ruleset.xml</ruleset>
+                     </rulesets>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <id>cpd-report</id>
+                         <phase>test-compile</phase>
+                         <goals>
+                             <goal>check</goal>
+                             <goal>cpd-check</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                 <dependencies>
+                     <dependency>
+                         <groupId>net.sourceforge.pmd</groupId>
+                         <artifactId>pmd-java</artifactId>
+                         <version>6.30.0</version>
+                     </dependency>
+                     <dependency>
+                         <groupId>net.sourceforge.pmd</groupId>
+                         <artifactId>pmd-core</artifactId>
+                         <version>6.30.0</version>
+                     </dependency>
+                 </dependencies>
+             </plugin>
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-plugin-plugin</artifactId>
@@ -95,9 +175,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${project.java.version}</source>
+                    <target>${project.java.version}</target>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
@@ -106,7 +186,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -129,7 +209,6 @@
                 <configuration>
                     <source>1.8</source>
                     <encoding>UTF-8</encoding>
-                    <additionalparam>-Xdoclint:none</additionalparam>
                 </configuration>
                 <executions>
                     <execution>
@@ -140,6 +219,6 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+         </plugins>
     </build>
 </project>
