@@ -1,5 +1,5 @@
 <h1 align="center">
-    graphql-pojo-maven-plugin
+    graphql-pojo-maven-plugin (Work In Progress)
 </h1>
 <hr />
 A simple graphql schema to pojo generator for java. Doesn't depend on any other graphql / java frameworks.
