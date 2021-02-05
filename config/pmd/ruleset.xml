@@ -19,7 +19,7 @@
         PMD Rules Configuration
     </description>
 
-    <exclude-pattern>.*/com/suraj/graphql/schema/.*</exclude-pattern>
+    <exclude-pattern>.*/com/suraj/graphql/HelpMojo.*</exclude-pattern>
 
     <rule ref="category/java/bestpractices.xml">
         <exclude name="GuardLogStatement"/>

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class FileUtils {
+public final class FileUtils {
     private static FileUtils INSTANCE;
 
     private FileUtils() {
