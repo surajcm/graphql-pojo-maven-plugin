@@ -26,21 +26,21 @@ public final class InputValidator {
     }
 
     private void validateSchema(final File schema) throws ValidationException {
-        String path = "";
-        if (schema == null || !schema.exists()) {
-            if (schema != null) {
-                path = schema.getPath();
-            }
+        if (schema == null) {
+            throw new ValidationException("Invalid schema directory : null");
+        }
+        if (schema.length() == 0 || !schema.exists()) {
+            String path = schema.getPath();
             throw new ValidationException("Invalid schema directory : " + path);
         }
     }
 
     private void validateOutputDir(final File outputDirectory) throws ValidationException {
-        String path = "";
-        if (outputDirectory == null || !outputDirectory.exists()) {
-            if (outputDirectory != null) {
-                path = outputDirectory.getPath();
-            }
+        if (outputDirectory == null) {
+            throw new ValidationException("Invalid outputDirectory : null");
+        }
+        if (outputDirectory.length() == 0 || !outputDirectory.exists()) {
+            String path = outputDirectory.getPath();
             throw new ValidationException("Invalid outputDirectory : " + path);
         }
     }
