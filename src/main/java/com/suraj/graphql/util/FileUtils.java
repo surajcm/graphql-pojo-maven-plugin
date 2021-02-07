@@ -21,28 +21,64 @@ public final class FileUtils {
     }
 
     public void cleanAndRecreateOutputDir(final File outputDir, final String packageName) throws IOException {
-        // during validation, we ensure that the output directory exists
         // if output directory is empty,  create the package
-        String[] fileNames = outputDir.list();
         String packageWithSystemDirFormat = packageWithDirectoryFormat(packageName);
         File packageDirectory = new File(outputDir, packageWithSystemDirFormat);
-        if (fileNames == null || fileNames.length == 0) {
-            //create package and return
-            createPackageDirectory(packageName, packageDirectory);
-            return;
-        }
         // if output directory has contents, check whether package exists, else do nothing
         // if package exists, delete all files inside the package
-        if (!packageDirectory.exists()) {
-            createPackageDirectory(packageName, packageDirectory);
-        } else {
-            File[] filesInPackageDir = packageDirectory.listFiles();
-            if (filesInPackageDir != null) {
-                Arrays.stream(filesInPackageDir).forEach(File::delete);
-            }
-            // todo: delete the entire package from output dir
-
+        if (!isEmptyDirectory(outputDir) && packageDirectory.exists()) {
+            deleteFilesInPackageDirectory(packageDirectory);
+            deletePackage(outputDir, packageDirectory);
         }
+        createPackageDirectory(packageName, packageDirectory);
+    }
+
+    private void deleteFilesInPackageDirectory(final File packageDirectory) {
+        File[] filesInPackageDir = packageDirectory.listFiles();
+        if (filesInPackageDir != null) {
+            Arrays.stream(filesInPackageDir).forEach(File::delete);
+        }
+    }
+
+    private boolean isEmptyDirectory(final File oneDirectory) {
+        String[] fileNames = oneDirectory.list();
+        return fileNames == null || fileNames.length == 0;
+    }
+
+    // todo: delete the entire package from output dir
+    private void deletePackage(final File outputDir, final File packageDirectory) {
+        File currentDirectory = packageDirectory;
+        boolean flag = true;
+        while (isSubDirectory(outputDir, currentDirectory)
+                && !isSameDirectory(outputDir, currentDirectory)
+                && flag) {
+            currentDirectory = packageDirectory.getParentFile();
+            if (isEmptyDirectory(currentDirectory)) {
+                deleteFilesInPackageDirectory(currentDirectory);
+            } else {
+                flag = false;
+            }
+        }
+    }
+
+    private boolean isSubDirectory(final File parentDir, final File childDir) {
+        boolean isSubdirectory = false;
+        try {
+            isSubdirectory = parentDir.getCanonicalPath().contains(childDir.getCanonicalPath());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return isSubdirectory;
+    }
+
+    private boolean isSameDirectory(final File outputDir, final File packageDirectory) {
+        boolean isSameDirectory = false;
+        try {
+            isSameDirectory = packageDirectory.getCanonicalPath().equalsIgnoreCase(outputDir.getCanonicalPath());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return isSameDirectory;
     }
 
     private void createPackageDirectory(final String packageName, final File packageDirectory) throws IOException {
