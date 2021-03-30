@@ -26,6 +26,7 @@ public final class JavaCodeGenerator {
         try {
             InputValidator.getInstance().validateInputs(schema, outputDir, packageName);
             FileUtils.getInstance().cleanAndRecreateOutputDir(outputDir, packageName);
+            SourceCodeGenerator.getInstance().generateJavaFile(outputDir,packageName);
         } catch (ValidationException | IOException illegalEx) {
             throw new MojoExecutionException("Unable to generate POJO classes : ", illegalEx);
         }
