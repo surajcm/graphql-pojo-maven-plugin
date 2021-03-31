@@ -90,7 +90,7 @@ public final class FileUtils {
     private String packageWithDirectoryFormat(final String packageName) {
         return Collections.list(new StringTokenizer(packageName, ".")).stream()
                 .map(token -> (String) token)
-                .filter(t -> t.trim().isEmpty())
+                .filter(t -> ! t.trim().isEmpty())
                 .collect(Collectors.joining(File.separator));
     }
 }

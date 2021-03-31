@@ -29,7 +29,7 @@ public class SourceCodeGenerator {
                 .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
                 .build();
 
-        TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld")
+        TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld123")
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                 .addMethod(main)
                 .build();
