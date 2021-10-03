@@ -1,21 +1,21 @@
-package com.suraj.graphql.validator;
+package com.github.surajcm.validator;
 
 
-import com.suraj.graphql.exception.ValidationException;
+import com.github.surajcm.exception.ValidationException;
 
 import java.io.File;
 
 public final class InputValidator {
-    private static InputValidator INSTANCE;
+    private static InputValidator instance;
 
     private InputValidator() {
     }
 
     public static synchronized InputValidator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new InputValidator();
+        if (instance == null) {
+            instance = new InputValidator();
         }
-        return INSTANCE;
+        return instance;
     }
 
     public void validateInputs(final File schema, final File outputDir, final String packageName)

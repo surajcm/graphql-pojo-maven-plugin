@@ -1,4 +1,4 @@
-package com.suraj.graphql.exception;
+package com.github.surajcm.exception;
 
 public class ValidationException extends Exception {
 

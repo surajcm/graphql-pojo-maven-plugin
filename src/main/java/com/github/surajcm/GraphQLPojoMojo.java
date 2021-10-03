@@ -1,6 +1,6 @@
-package com.suraj.graphql;
+package com.github.surajcm;
 
-import com.suraj.graphql.generation.JavaCodeGenerator;
+import com.github.surajcm.generation.JavaCodeGenerator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;

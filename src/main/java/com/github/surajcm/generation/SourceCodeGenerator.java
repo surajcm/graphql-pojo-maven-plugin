@@ -1,8 +1,9 @@
-package com.suraj.graphql.generation;
+package com.github.surajcm.generation;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import javax.lang.model.element.Modifier;
 import java.io.File;
@@ -21,7 +22,8 @@ public class SourceCodeGenerator {
         return INSTANCE;
     }
 
-    public void generateJavaFile(final File outputDir, final String packageName) {
+    public void generateJavaFile(final File outputDir, final String packageName)
+            throws MojoExecutionException {
         MethodSpec main = MethodSpec.methodBuilder("main")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .returns(void.class)
@@ -40,7 +42,7 @@ public class SourceCodeGenerator {
         try {
             javaFile.writeTo(System.out);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            throw new MojoExecutionException("Unable to generate POJO classes : ", exception);
         }
     }
 }

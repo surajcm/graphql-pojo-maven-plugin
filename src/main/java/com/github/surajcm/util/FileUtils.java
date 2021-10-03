@@ -1,4 +1,4 @@
-package com.suraj.graphql.util;
+package com.github.surajcm.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,19 +8,20 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 public final class FileUtils {
-    private static FileUtils INSTANCE;
+    private static FileUtils instance;
 
     private FileUtils() {
     }
 
     public static synchronized FileUtils getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new FileUtils();
+        if (instance == null) {
+            instance = new FileUtils();
         }
-        return INSTANCE;
+        return instance;
     }
 
-    public void cleanAndRecreateOutputDir(final File outputDir, final String packageName) throws IOException {
+    public void cleanAndRecreateOutputDir(final File outputDir,
+                                          final String packageName) throws IOException {
         // if output directory is empty,  create the package
         String packageWithSystemDirFormat = packageWithDirectoryFormat(packageName);
         File packageDirectory = new File(outputDir, packageWithSystemDirFormat);
@@ -36,6 +37,7 @@ public final class FileUtils {
     private void deleteFilesInPackageDirectory(final File packageDirectory) {
         File[] filesInPackageDir = packageDirectory.listFiles();
         if (filesInPackageDir != null) {
+            // log in debug mode about the files being deleted, with file names
             Arrays.stream(filesInPackageDir).forEach(File::delete);
         }
     }
@@ -74,7 +76,8 @@ public final class FileUtils {
     private boolean isSameDirectory(final File outputDir, final File packageDirectory) {
         boolean isSameDirectory = false;
         try {
-            isSameDirectory = packageDirectory.getCanonicalPath().equalsIgnoreCase(outputDir.getCanonicalPath());
+            isSameDirectory = packageDirectory.getCanonicalPath().equalsIgnoreCase(
+                    outputDir.getCanonicalPath());
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -88,9 +91,10 @@ public final class FileUtils {
     }
 
     private String packageWithDirectoryFormat(final String packageName) {
-        return Collections.list(new StringTokenizer(packageName, ".")).stream()
+        return Collections.list(new StringTokenizer(packageName, "."))
+                .stream()
                 .map(token -> (String) token)
-                .filter(t -> ! t.trim().isEmpty())
+                .filter(t -> !t.trim().isEmpty())
                 .collect(Collectors.joining(File.separator));
     }
 }

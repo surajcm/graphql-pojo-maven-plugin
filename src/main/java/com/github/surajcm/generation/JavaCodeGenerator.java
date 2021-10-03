@@ -1,27 +1,29 @@
-package com.suraj.graphql.generation;
+package com.github.surajcm.generation;
 
-import com.suraj.graphql.exception.ValidationException;
-import com.suraj.graphql.util.FileUtils;
-import com.suraj.graphql.validator.InputValidator;
+import com.github.surajcm.exception.ValidationException;
+import com.github.surajcm.util.FileUtils;
+import com.github.surajcm.validator.InputValidator;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
 import java.io.IOException;
 
 public final class JavaCodeGenerator {
-    private static JavaCodeGenerator INSTANCE;
+    private static JavaCodeGenerator instance;
 
     private JavaCodeGenerator() {
     }
 
     public static synchronized JavaCodeGenerator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new JavaCodeGenerator();
+        if (instance == null) {
+            instance = new JavaCodeGenerator();
         }
-        return INSTANCE;
+        return instance;
     }
 
-    public void generatePojoFromSchema(final File schema, final File outputDir, final String packageName)
+    public void generatePojoFromSchema(final File schema,
+                                       final File outputDir,
+                                       final String packageName)
             throws MojoExecutionException {
         try {
             InputValidator.getInstance().validateInputs(schema, outputDir, packageName);
@@ -31,6 +33,4 @@ public final class JavaCodeGenerator {
             throw new MojoExecutionException("Unable to generate POJO classes : ", illegalEx);
         }
     }
-
-
 }

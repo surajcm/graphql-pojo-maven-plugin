@@ -1,6 +1,6 @@
-package com.suraj.graphql.validator;
+package com.github.surajcm.validator;
 
-import com.suraj.graphql.exception.ValidationException;
+import com.github.surajcm.exception.ValidationException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

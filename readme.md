@@ -12,7 +12,7 @@ A simple graphql schema to pojo generator for java. Doesn't depend on any other 
     <plugins>
         ...
         <plugin>
-            <groupId>com.suraj.graphql</groupId>
+            <groupId>com.github.surajcm</groupId>
             <artifactId>graphql-pojo-maven-plugin</artifactId>
             <version>1.0.0</version>
             <executions>
