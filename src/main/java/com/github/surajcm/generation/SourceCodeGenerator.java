@@ -10,16 +10,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class SourceCodeGenerator {
-    private static SourceCodeGenerator INSTANCE;
+    private static SourceCodeGenerator instance;
 
     private SourceCodeGenerator() {
     }
 
     public static synchronized SourceCodeGenerator getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new SourceCodeGenerator();
+        if (instance == null) {
+            instance = new SourceCodeGenerator();
         }
-        return INSTANCE;
+        return instance;
     }
 
     public void generateJavaFile(final File outputDir, final String packageName)

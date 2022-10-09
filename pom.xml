@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.6.0</version>
+            <version>3.6.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.squareup</groupId>
@@ -114,7 +114,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-checkstyle-plugin</artifactId>
-                 <version>3.1.1</version>
+                 <version>3.2.0</version>
                  <configuration>
                      <propertyExpansion>config_loc=${basedir}/config/checkstyle</propertyExpansion>
                      <configLocation>config/checkstyle/checkstyle.xml</configLocation>
@@ -130,7 +130,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-pmd-plugin</artifactId>
-                 <version>3.14.0</version>
+                 <version>3.19.0</version>
                  <configuration>
                      <failOnViolation>false</failOnViolation>
                      <printFailingErrors>true</printFailingErrors>
@@ -153,19 +153,19 @@
                      <dependency>
                          <groupId>net.sourceforge.pmd</groupId>
                          <artifactId>pmd-java</artifactId>
-                         <version>6.30.0</version>
+                         <version>6.50.0</version>
                      </dependency>
                      <dependency>
                          <groupId>net.sourceforge.pmd</groupId>
                          <artifactId>pmd-core</artifactId>
-                         <version>6.30.0</version>
+                         <version>6.50.0</version>
                      </dependency>
                  </dependencies>
              </plugin>
              <plugin>
                  <groupId>org.jacoco</groupId>
                  <artifactId>jacoco-maven-plugin</artifactId>
-                 <version>0.8.5</version>
+                 <version>0.8.8</version>
                  <configuration>
                      <excludes>
                          <exclude>com/suraj/graphql/HelpMojo.*</exclude>
@@ -190,7 +190,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-plugin-plugin</artifactId>
-                 <version>3.6.0</version>
+                 <version>3.6.4</version>
                  <configuration>
                      <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -214,7 +214,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <source>${project.java.version}</source>
@@ -246,7 +246,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.4.1</version>
                 <configuration>
                     <source>1.8</source>
                     <encoding>UTF-8</encoding>
