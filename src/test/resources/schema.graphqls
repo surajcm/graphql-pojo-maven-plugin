@@ -5,4 +5,13 @@ type Query {
 type TempFilm {
     title: String
     episode_id: Int
+    genre: Genre
+}
+
+enum Genre {
+    ACTION
+    COMEDY
+    DRAMA
+    HORROR
+    SCIFI
 }
