@@ -7,12 +7,30 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
+/**
+ * Utility class for file system operations related to POJO generation.
+ *
+ * <p>This class provides methods for managing the output directory structure,
+ * including cleaning existing generated files and creating package directories.</p>
+ *
+ * <p>This class follows the singleton pattern. Use {@link #getInstance()} to obtain
+ * an instance.</p>
+ *
+ * @author Suraj Muraleedharan
+ * @since 1.0.0
+ */
 public final class FileUtils {
+
     private static FileUtils instance;
 
     private FileUtils() {
     }
 
+    /**
+     * Returns the singleton instance of FileUtils.
+     *
+     * @return the FileUtils singleton instance
+     */
     public static synchronized FileUtils getInstance() {
         if (instance == null) {
             instance = new FileUtils();
@@ -20,6 +38,21 @@ public final class FileUtils {
         return instance;
     }
 
+    /**
+     * Cleans and recreates the output directory for the specified package.
+     *
+     * <p>This method performs the following operations:</p>
+     * <ol>
+     *     <li>If the output directory is empty, creates the package directory structure</li>
+     *     <li>If the package directory already exists, deletes all files within it</li>
+     *     <li>Cleans up empty parent directories up to the output directory</li>
+     *     <li>Creates the package directory structure</li>
+     * </ol>
+     *
+     * @param outputDir the root output directory where generated files will be placed
+     * @param packageName the Java package name (e.g., "com.example.generated")
+     * @throws IOException if directory creation fails or file deletion encounters an error
+     */
     public void cleanAndRecreateOutputDir(final File outputDir,
                                           final String packageName) throws IOException {
         // if output directory is empty,  create the package
